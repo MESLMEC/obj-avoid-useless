@@ -1,7 +1,21 @@
-What I did is,
+# Obstacle Avoiding Bot
+This is a basic example code for an obstacle avoiding bot. 
 
-1. created a cloud repo on my github.
-2. inited a local git repo on this project.
-3. set upstream to the cloud repo and pushed.
-4. transfer the repo to MESL org.
-5. forked the repo to my account.
+## Components Used
+- HCSR04 sonar sensor
+- SG90 servo motor
+- yellow motor x 4
+- L298N motor driver
+- LM2596 Buck converter (DC to DC)
+
+## Framework
+Arduino
+
+**Header Files**
+
+`Arduino.h`  
+`Servo.h`
+
+## Limitations
+- Slow scan due to only one proximity sensor that rotates and reads.
+- All contagious motor pins does not support pwm. That forced us to do unnecessary algorithm to drive motors controlling the speed.

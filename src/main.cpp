@@ -1,13 +1,13 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#define FontServoPin 10
+#define FrontServoPin 10
 #define EchoPin 8
 #define TrigPin 9
 #define DistanceThreshold 25.0F;
 
-const uint8_t rightMotorPins[2] = {4, 5};
-const uint8_t leftMotorPins[2] = {6, 7};
+const uint8_t rightMotorPins[2] = {4, 5}; // {DigitalPin, PWMPin}
+const uint8_t leftMotorPins[2] = {6, 7}; // {PWMpin, DigitalPin}
 Servo frontServo = Servo();
 
 bool objectInFront = false;
@@ -18,7 +18,7 @@ void setupSensors()
 {
     pinMode(TrigPin, OUTPUT);
     pinMode(EchoPin, INPUT);
-    frontServo.attach(FontServoPin);
+    frontServo.attach(FrontServoPin);
     frontServo.write(90);
 }
 
@@ -152,22 +152,33 @@ void loop()
     else
     {
         stop();
+        delay(500);
         getStatus(25.0, &objectInLeft, &objectInRight);
 
         // default left
         if (!objectInLeft)
         {
+            left();
+            delay(500);
+            stop();
+            delay(500);
             // TODO: Don't use sleep. Actually detect if path is cleart in the front.
         }
         else if (!objectInRight)
         {
-            // TODO: Don't block the the brain.
+            right();
+            delay(500);
             stop();
+            delay(500);
+            // TODO: Don't block the the brain.
         }
         else
         {
             // TODO: Actually spin the whole thing and try to return.
+            driveBackward(0.6);
+            delay(500);
             stop();
+            delay(500);
         }
 
         objectInFront = false;
