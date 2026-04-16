@@ -5,3 +5,5 @@ What I did is,
 3. set upstream to the cloud repo and pushed.
 4. transfer the repo to MESL org.
 5. forked the repo to my account.
+
+> joyanta have repo access on the org ?
